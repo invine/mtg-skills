@@ -9,9 +9,11 @@ Find decisions that plausibly improve the player's chance to win, prioritizing s
 
 ## 1. Establish the evidence
 
-Read the actual played list and game history. Track deck changes by game, format, play/draw, mulligans, and results. Separate the original pool, a recommended build, and the version actually played. For 17Lands or raw Arena data, read [17lands-replays.md](references/17lands-replays.md) before retrieval or reconstruction; it covers evidence reuse, coverage, decision links, and cast confirmation.
+Read the actual played list and game history. Track deck changes by game, format, play/draw, mulligans, and results. Separate the original pool, a recommended build, and the version actually played. For 17Lands links, run the bundled Python extractor using [17lands-extractor.md](references/17lands-extractor.md), then inspect every game's coverage and unresolved cast evidence. Reuse its cache and targeted state queries for follow-ups. Read [17lands-replays.md](references/17lands-replays.md) for raw-log interpretation, unsupported schemas, and decision-link verification.
 
 For an automated cast timeline or a suspected canceled cast, use `scripts/cast_evidence.py` as described in [cast-evidence.md](references/cast-evidence.md). If execution is unavailable, apply its evidence categories manually and label unresolved attempts.
+
+After extraction, use [review-automation.md](references/review-automation.md) to initialize an unreviewed coverage ledger, query turn cycles and combat episodes, and reuse exact-printing card text. For source-only or screenshot reviews, keep the same coverage and evidence distinctions manually.
 
 Review all games requested, including wins. If only a position or subset is available, state that scope. Verify exact card versions and all decision-relevant rules using Savecraft, Scryfall or official sources, including prepared spells, activated costs, protection, alternative mana, tokens, and repeated triggered abilities.
 
@@ -33,6 +35,8 @@ For each potentially material decision, capture the state immediately before the
 Label facts, inferences, and unknowns. Keep later draws and revealed cards outside the information available to the decision-maker; they may illustrate the actual result separately. Read the relevant section of [strategic-patterns.md](references/strategic-patterns.md) for interaction resolution, combat audits, multi-action sequences, expiring removal windows, removal versus trades, development versus value, hidden interaction, concessions, or a challenged finding.
 
 Before evaluating a material attack, block, response to interaction, or threat deployment, read [opponent-model.md](references/opponent-model.md). Use its hand-inference procedure to rank plausible holdings from earlier turns and subsequent draws. When interaction challenges known protection, apply **Challenges to known protection** before judging whether to respond. For threat deployment, apply the deployment comparison, including the cost of waiting.
+
+For claims about a known hand, query the knowledge ledger at the before-action event and select the relevant viewer seat. Use the bounded calculators in [review-automation.md](references/review-automation.md#bounded-calculators) for repeated draw, colored-mana and damage arithmetic after verifying their inputs and supported mechanics.
 
 **Complete when:** each available opening decision and turn's mana use has been considered; the actual line and proposed alternatives are legal; opponent reads that could change the verdict have evidence and stated uncertainty. If a missing fact could reverse the evaluation, present conditional branches or leave the decision unresolved.
 
@@ -75,5 +79,7 @@ Attach a clickable link to the exact decision position beside every highlighted 
 End with a small number of concrete habits to practice, such as counting remaining threats before trading or checking which player benefits from another untap. Answer the user's disputed point directly before broadening the review.
 
 When challenged, reopen the card text and before-action state, test both lines, and state which conclusion survives and why. Explicitly withdraw an incorrect claim and retain supported ones. Carry accepted corrections forward so later summaries do not revive a disproven criticism.
+
+Before delivering a 17Lands review, validate its coverage and finding ledger using [review-automation.md](references/review-automation.md#coverage-and-findings), then render highlighted plays from the verified entries. Resolve failures or retain explicit insufficient-evidence/link fallbacks. Validate assembled answer blocks when producing an answer file.
 
 **Complete when:** every highlighted play has a verified decision-position link or the explicit unavailable-link fallback, each link identifies the state used in the analysis, and the user has a practical decision rule, not merely a result-based verdict.

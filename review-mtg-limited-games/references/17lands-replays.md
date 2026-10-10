@@ -2,6 +2,8 @@
 
 ## Retrieval and scope
 
+Use the bundled [Python extraction workflow](17lands-extractor.md) first. Inspect its manifest, coverage, and selected states before writing new retrieval or parsing code. The checks below govern adapter changes and evidence verification; apply them directly when execution or a supported schema is unavailable.
+
 For a 17Lands details, history, deck, or pool link, establish the event and the page's role before following associated links. Use the public page, exports, or publicly accessible page data. Follow access controls; if the required replay is unavailable, ask for a log, export, or screenshots and bound the review to available evidence.
 
 Record match and game indices independently. A best-of-three match can contain several games; URLs may use zero-based indices while the user calls the first game “game 1.” Map each game to its actual deck version and player seat. Obtain the card details needed to interpret actions; metadata with a card name and mana value may omit decisive rules text.
@@ -51,6 +53,6 @@ Validate reconstructed states around proposed criticisms against visible replay 
 
 Treat selecting a spell, assigning targets, entering payment, and tentative stack movement as a casting attempt. Confirm commitment from a completed cast, resolution, countering, or priority passing after casting and payment finish. A rollback can restore the card and mana before commitment; exclude that attempt from spells cast, triggers, and mana spent. Scope evidence to one attempt and spell instance, so a later successful recast remains separate.
 
-When emitting an automated cast timeline, or when a criticism depends on a suspected canceled cast, run `scripts/cast_evidence.py` before treating it as a played action. Read [cast-evidence.md](cast-evidence.md) for normalization and source-reference requirements. This helper checks the normalized evidence boundary; adapt the current upstream schema separately and verify its mapping against the source.
+The bundled extractor already calls `scripts/cast_evidence.py` when emitting its cast timeline. For another decoder or a suspected canceled cast outside that output, run the helper before treating the attempt as a played action. Read [cast-evidence.md](cast-evidence.md) for normalization and source-reference requirements. This helper checks the normalized evidence boundary; verify the raw adapter's mapping against the source.
 
 If evidence conflicts, inspect adjacent states and keep the action unresolved until reconciled. A countered spell was still cast; a canceled attempt was not. Preserve canceled attempts as optional context about deliberation, without evaluating them as executed plays.
