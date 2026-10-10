@@ -1,5 +1,34 @@
 # Strategic comparison patterns
 
+## Contents
+
+- [Risk when ahead or behind](#risk-when-ahead-or-behind)
+- [Interaction resolution](#interaction-resolution)
+- [Alternative sequences](#alternative-sequences)
+- [Combat audit](#combat-audit)
+- [Removal versus trading](#removal-versus-trading-identify-the-scarce-resource)
+- [Development versus incremental value](#development-versus-incremental-value-compare-clocks)
+- [Baiting interaction and concentrated threats](#baiting-interaction-and-concentrated-threats)
+- [Exposed tokens versus durable development](#exposed-tokens-versus-durable-development)
+- [Attack windows and hidden interaction](#attack-windows-and-hidden-interaction)
+- [Removal timing and activated protection](#removal-timing-and-activated-protection)
+- [Concessions and low-equity games](#concessions-and-low-equity-games)
+- [Reopening a disputed finding](#reopening-a-disputed-finding)
+
+## Risk when ahead or behind
+
+Judge advantage by the projected winning route across board, hand, life, mana, engines, and remaining library. Establish whose position improves with time. A life or material lead can coexist with a losing race or an opposing engine that will take over. Reassess the role after a meaningful exchange or new information.
+
+- **Ahead with a durable winning route — ask how we lose.** Identify the opponent's credible comeback routes and what resources prevent them. Prefer converting the existing advantage when extra damage or material adds little to winning but exposes a key blocker, threat, or protection spell. Consider preserving redundancy or accepting a modest material loss to close a dangerous route. Trade or simplify only if the resulting position still supports our win.
+- **Behind on the current trajectory — ask how we win.** Work backward from reachable outs, attack windows, and sequences that can reverse the game. Accept a narrower success branch or vulnerability to an answer when the safer-looking line mostly postpones defeat. Preserve the mana, life, and bodies needed to exploit the out if it arrives. Compare multiple routes before committing to one; require a concrete improvement in winning chances to justify added risk.
+- **Temporary advantage or unclear role — compare both clocks.** Charge caution for the extra draws, blockers, or engine activations it grants. An attack can reduce overall risk by ending the game sooner; a low life total can still permit patient defense when our late game is stronger. Recompute the full position instead of equating ahead with passive or behind with reckless.
+
+Use the inferred hand range to price credible dangers. Establish what playing around each answer costs and whether it actually improves our outcome against that answer. Preserve a verified win; spend resources on insurance when it protects meaningful winning chances, rather than on accumulating an unnecessary margin or fearing every legal card.
+
+**Complete when:** the comparison names our winning route, the opponent's relevant out, and how the chosen risk improves the outcome through the next meaningful conversion of resources.
+
+Strategy references: Reid Duke, [Playing From Ahead, Playing From Behind](https://magic.wizards.com/en/news/feature/playing-ahead-playing-behind-2015-03-30) and [Playing Safe and Playing Scared](https://magic.wizards.com/en/news/feature/playing-safe-and-playing-scared-2015-08-24).
+
 ## Interaction resolution
 
 For a verdict that depends on a death, trigger, threshold, or loyalty change, read the full text of the relevant permanents, including static abilities on other objects. Pay costs and order cast/target triggers correctly. After each resolution, recompute stats and resources, apply state-based actions, and stack newly triggered abilities before the next priority window. Check whether a continuous effect changes the usual result, such as keeping a planeswalker on the battlefield at zero loyalty; remove that exception when its source leaves.

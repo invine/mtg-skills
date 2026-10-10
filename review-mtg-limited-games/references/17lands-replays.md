@@ -16,7 +16,18 @@ Keep a task-local evidence index keyed by event, match, game, seat, and deck ver
 
 Build a compact timeline with global turn/phase, material committed actions, life and board changes, and raw-event/frame references. Scan every requested game, then inspect detailed states around consequential decisions and disputed claims. Keep a small ledger of verified findings, uncertainties, and withdrawn claims. Reopen source evidence for a new question rather than treating an earlier conclusion as a fresh fact.
 
-For a new decoder, inspect the current payload's required fields and full/diff behavior before parsing. Stop at an unknown shape with a useful diagnostic; use an export or visible replay for the affected gap. Keep endpoint discovery separate from state reconstruction, so a changed route need not change game logic. Preserve a mapping from each cited decision to its raw event or replay frame; publish precise frame anchors only after verifying them.
+For a new decoder, inspect the current payload's required fields and full/diff behavior before parsing. Stop at an unknown shape with a useful diagnostic; use an export or visible replay for the affected gap. Keep endpoint discovery separate from state reconstruction, so a changed route need not change game logic.
+
+## Decision links
+
+Make each highlighted decision independently inspectable:
+
+1. Record its event, match/game indices, player seat, global turn, active player, phase, and raw event. Select the state immediately before the choice; use the opening-hand decision for a mulligan and the available action window for a passed attack or missed response. Link additional positions when a finding depends on separate windows, such as passing the main phase and then declining an end-step play.
+2. Obtain the exact-position URL from the replay's current share/navigation controls or derive it from the current frontend's URL parsing and frame construction. Map the raw event to the displayed replay position explicitly: raw array indices, `gameStateId`, global turns, and UI frame indices may differ. Use observed URL syntax and preserve the correct match/game indices.
+3. Open each distinct position URL and check that it lands on the intended turn, phase, and board or stack state. An HTTP success or a page that opens at the start of the game is not verification. If rendering is unavailable, verify both the URL parameter handling and the mapped replay state from current source and raw data; record that verification method in the evidence index. Reuse a verified mapping within the review.
+4. Keep the URL, position locator, verification method, and supporting state with the finding. Check the final answer's links against this ledger, including brief positive examples and overview-table callouts.
+
+If the source lacks exact-position links or neither verification route is available, document the specific limitation. Supply the nearest source link, match/game, whose turn, global turn, phase, action description, and a snapshot or short log excerpt that locates the decision. For screenshot or log-only reviews, cite the particular image or log location. Publish only verified position URLs; never invent an anchor to satisfy the output requirement.
 
 ## Raw Arena event interpretation
 
@@ -34,7 +45,7 @@ Apply these checks when reconstructing `gameStateMessage` or similar event strea
 - Keep hidden identities concealed until their reveal. An ID associated with a later revealed card does not make that identity known on an earlier turn.
 - Label turn numbers accurately: a global turn counter advances on each player's turn, unlike “my turn five.”
 
-Validate reconstructed states around proposed criticisms against visible replay snapshots when available and reconcile hand sizes, mana spent, damage, deaths, and triggers over adjacent raw states. Use browser interaction to resolve a specific evidence gap; reuse complete verified data rather than reopening the UI solely to create deeper links. If the visible replay is unavailable, establish the relevant facts directly from raw state and resolution evidence, identify remaining uncertainty, and omit unverified frame anchors. A parser's prose summary is a working aid, not independent evidence. An uncertain reconstruction supports a conditional observation, not a firm gameplay error.
+Validate reconstructed states around proposed criticisms against visible replay snapshots when available and reconcile hand sizes, mana spent, damage, deaths, and triggers over adjacent raw states. Use browser interaction to resolve evidence gaps or verify where decision links land. If the visible replay is unavailable, establish the relevant facts directly from raw state and resolution evidence and identify remaining uncertainty. A parser's prose summary is a working aid, not independent evidence. An uncertain reconstruction supports a conditional observation, not a firm gameplay error.
 
 ## Cast confirmation
 

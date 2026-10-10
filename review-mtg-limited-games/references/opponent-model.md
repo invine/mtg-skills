@@ -42,6 +42,21 @@ Account for selection in offered trades. An opponent may accept a creature-for-t
 
 Practice cue: **What would make them choose this response, and does our line still work against that hand?**
 
+## Challenges to known protection
+
+When the opponent targets a threat they know we can protect, first establish how they learned about the protection and whether it remains available. Condition the hand range on their actual action: ask what makes offering this exchange profitable despite the known response. Treat follow-up interaction as a hypothesis supported by that action, with bluffing, engine triggers, tempo, and a possible oversight as competing explanations.
+
+Compare spending protection with letting the original spell resolve. Test both follow-up windows:
+
+- **Immediate:** counter the protection spell, answer the threat before a protection trigger resolves, or use an effect the protection does not stop. Pay the entire sequence in the correct colors, including tax payments. Distinguish countering a flash creature before entry from removing it after its entry trigger already exists; removing the source alone generally leaves that trigger intact.
+- **After protection expires:** use an end-step spell to draw out protection lasting only until end of turn, then untap and answer the threat. Verify the follow-up's timing, colors, target restrictions, and ability to handle any permanent growth. Credit another protection use only when an actual available card or ability enables it; a resolved creature's entry ability is not automatically reusable.
+
+Price both branches through our next useful turn: threat survival, lost counters, replay mana, missed attacks, protection retained, opposing answers consumed, and value already gained from cast or entry triggers. Letting bounce resolve may preserve a replayable threat and protection for later, while paying in tempo and counters. Spending protection may still be best if keeping the threat advances lethal or consumes an answer that would otherwise stop the next winning play. Recognizing bait is evidence for comparison, not a verdict to decline it.
+
+Worked pattern ([Game 4, turn 9 end step](https://www.17lands.com/history/e187816eba1f41c78c0d0c57aa13ce26/3/0/161)): Unsummon targets Proft while Teyo is publicly known. Compare a counter on Teyo with removal on the following turn after its temporary hexproof expires. With four mana before a two-mana Teyo, only two remain for a possible three-mana tax. Treat those follow-ups as reads unless known at the time; apply the retrospective evidence rule above to later reveals.
+
+**Complete when:** a recommendation to spend or retain known protection accounts for both follow-up windows and the cost of letting the original interaction resolve, with a stated read that could reverse the choice.
+
 ## Deploying threats into removal or counterspells
 
 Use the inferred hand range to compare deploying now, playing a different threat, holding up a response, and waiting for a specific later sequence. Name the exact payoff of waiting: protection mana, paying a tax counter, two useful spells in one turn, or an opponent's necessary tap-out. Charge the delay for lost attacks, blocks, engine activations, and opposing draws. Being ahead or holding a bomb does not by itself justify waiting; urgency can make exposure the best winning route.
