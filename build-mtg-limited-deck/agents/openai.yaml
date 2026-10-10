@@ -1,0 +1,14 @@
+interface:
+  display_name: MTG Limited Deck Builder
+  short_description: Choose a coherent Limited deck and mana base
+  default_prompt: Use $build-mtg-limited-deck to build the best deck from this pool
+    and explain its plan and close cuts.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

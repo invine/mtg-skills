@@ -1,0 +1,14 @@
+interface:
+  display_name: MTG Limited Game Review
+  short_description: Find strategic improvements from Limited replays
+  default_prompt: Use $review-mtg-limited-games to review these games, assess how
+    the deck performed, and identify the most important decisions to improve.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
