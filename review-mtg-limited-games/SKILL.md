@@ -37,6 +37,8 @@ Before a material attack, block, interaction response or deployment, read [oppon
 
 ## 3. Generate alternatives, then compare the played line
 
+Identify who benefits from time and which resource currently limits winning: threats, answers, cards, mana, life, or an attack window. Before judging a consequential risk, apply [Risk when ahead or behind](references/strategic-patterns.md#risk-when-ahead-or-behind) to establish whether the current advantage is durable and what can reverse it. Compare the played line with the strongest plausible alternative, including the opponent's sensible responses and the following turn.
+
 For each own turn or requested position, keep **lethal, development/spell order, land choice, targets/counters, combat, and reserved interaction** as separate decisions. For combat windows, cover lethal, targets, combat and interaction. One finding completes only its own decision. Share a decision record across overlapping windows when its source state and analysis cover both.
 
 Evaluate candidates in this order, before explaining the actual outcome:
@@ -47,13 +49,13 @@ Evaluate candidates in this order, before explaining the actual outcome:
 4. **Land and opponent-turn resources.** Compare land options against both the chosen sequence and held responses before the next untap. Run the land-options calculator when color access differs. Finding a spell-order error does not resolve the independent land choice or whether removal stayed available.
 5. **Actual play and strategic preference.** Compare the played line with the candidates just established. Record the advantage, retained resources, cost of waiting and condition that reverses the preference. Reopen the search if a user supplies a missed alternative.
 
-Read the relevant procedure in [strategic-patterns.md](references/strategic-patterns.md) for multi-action sequences, combat/clock comparisons, interaction resolution, expiring answers, removal versus trades, value versus development, risk, concessions or a challenged finding. Apply the best-response procedure in [opponent-model.md](references/opponent-model.md). Identify who benefits from time and the resource limiting the winning route. For a stabilization line, continue to the next meaningful attack or resource conversion; distinguish delaying defeat from creating a route to victory.
+Read the relevant procedure in [strategic-patterns.md](references/strategic-patterns.md) for multi-action sequences, combat/clock comparisons, interaction resolution, expiring answers, removal versus trades, value versus development, concessions or a challenged finding. Apply the best-response procedure in [opponent-model.md](references/opponent-model.md). For a stabilization line, continue to the next meaningful attack or resource conversion; distinguish delaying defeat from creating a route to victory.
 
 Store candidate actions with source-object identities, checked calculation inputs/results, and resources/exposure through the next opponent turn. The validator recomputes supported arithmetic and rejects unavailable baseline resources. For unsupported mechanics retain the tool result and explicit manual steps; use `insufficient_evidence` when they cannot be resolved. Use `not_applicable` only with a state fact and a reason that this particular decision has no meaningful choice.
 
 Classify findings as **clear error**, **preferred line**, **close choice**, **good play**, or **insufficient evidence**. Distinguish a defensible setup from a subsequent bad attack, an improved chance from guaranteed lethal, and a close preference from a mistake. Numerical win probabilities require a defensible model.
 
-**Complete when:** every required decision is independently accounted for; serious alternatives have legal sequences, decisive damage/survivors and opponent-turn resources; later draws have not supplied baseline actions; and the actual play has been compared with the strongest alternative. A reviewed status or generic note alone cannot complete coverage. Zero strategic mistakes is a valid conclusion after these checks.
+**Complete when:** every required decision is independently accounted for; serious alternatives have legal sequences, decisive damage/survivors and opponent-turn resources; later draws have not supplied baseline actions; and the actual play has been compared with the strongest alternative. For a consequential risk, name the losing route it closes or the winning route it opens, including the cost of waiting. A reviewed status or generic note alone cannot complete coverage. Zero strategic mistakes is a valid conclusion after these checks.
 
 ## 4. Separate deck behavior from pilot decisions
 
