@@ -42,7 +42,7 @@ class CombatTests(unittest.TestCase):
         self.assertEqual(result["damage_to_targets"], {"opponent": 10})
         self.assertEqual(set(result["dead"]), {"flyer", "guard"})
         data["attackers"][0]["keywords"].append("double strike")
-        self.assertEqual(calculate(data)["status"], "unsupported")
+        self.assertEqual(calculate(data)["dead"], ["guard"])
 
     def test_blocked_creature_stays_blocked_when_blocker_has_left(self):
         from limited_math import calculate

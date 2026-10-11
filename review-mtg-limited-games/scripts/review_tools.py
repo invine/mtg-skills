@@ -10,6 +10,7 @@ from pathlib import Path
 from extract_17lands import metadata, reconstruct
 from seventeenlands_io import EvidenceCache, digest, write_json
 from seventeenlands_state import DECODER_VERSION
+from decision_audit import FACETS, snapshot, decision_template, validate_decision, validate_coverage
 
 
 def fingerprint(value):
@@ -45,9 +46,9 @@ def make_review(reports, positions=None):
             entries += [("combat", o["start_event"]) for o in report.get("combats", [])]
         for kind, event in entries:
             checks.append({"id": f"g{game}:{kind}:{event}", "game": game, "kind": kind, "event": event,
-                           "status": "unreviewed", "note": ""})
-    return {"schema": 1, "games": sorted(reports), "positions": [list(p) for p in positions], "provenance": provenance,
-            "checks": checks, "findings": [], "withdrawn": []}
+                           "status": "unreviewed", "note": "", "decision_ids": []})
+    return {"schema": 2, "games": sorted(reports), "positions": [list(p) for p in positions], "provenance": provenance,
+            "checks": checks, "decisions": [], "findings": [], "withdrawn": []}
 
 
 def validate_review(ledger, reports, states, answer=None, positions=None):
@@ -56,6 +57,17 @@ def validate_review(ledger, reports, states, answer=None, positions=None):
         errors.append("Requested review scope must contain at least one game.")
     if any(ledger.get(key) != expected[key] for key in ("schema", "games", "positions", "provenance")):
         errors.append("Review scope/provenance is stale or changed; regenerate and reconcile the ledger.")
+    records = ledger.get("decisions", [])
+    decisions = {d.get("id"): d for d in records}
+    if len(decisions) != len(records) or any(not isinstance(k, str) or not k for k in decisions):
+        errors.append("Decision IDs must be distinct nonempty strings.")
+    for record in records:
+        game, event = record.get("game"), record.get("state_event")
+        report, state = reports.get(game), states.get((game, event))
+        if report is None or state is None or record.get("kind") not in set().union(*map(set, FACETS.values())):
+            errors.append(f"{record.get('id')}: missing source state or invalid decision kind.")
+            continue
+        errors.extend(validate_decision(record, report, state, context(report, state), position_only=bool(positions)))
     actual = ledger.get("checks", [])
     by_id = {c.get("id"): c for c in actual}
     if len(by_id) != len(actual) or set(by_id) != {c["id"] for c in expected["checks"]}:
@@ -68,6 +80,11 @@ def validate_review(ledger, reports, states, answer=None, positions=None):
             errors.append(f"{check['id']}: needs a reviewer status and note.")
         if reports[check["game"]].get("coverage") == "unavailable" and item.get("status") != "insufficient_evidence":
             errors.append(f"{check['id']}: unavailable history cannot be marked reviewed.")
+        if item.get("status") == "insufficient_evidence":
+            if not item.get("missing") or not item.get("impact"):
+                errors.append(f"{check['id']}: identify missing evidence and its impact.")
+        else:
+            errors.extend(validate_coverage({**item, **{k: check[k] for k in ("id", "game", "kind", "event")}}, decisions, reports[check["game"]], states))
     ids = set()
     for finding in ledger.get("findings", []):
         fid = finding.get("id", "")
@@ -81,6 +98,9 @@ def validate_review(ledger, reports, states, answer=None, positions=None):
         if report is None or state is None:
             errors.append(f"{fid}: missing before-action source state.")
             continue
+        decision = decisions.get(finding.get("decision_id"), {})
+        if decision.get("game") != game or decision.get("state_event") != event:
+            errors.append(f"{fid}: link the finding to a decision at this before-action state.")
         point = context(report, state)
         if finding.get("context") != point:
             errors.append(f"{fid}: context/URL does not match the reconstructed state.")
@@ -114,7 +134,8 @@ def validate_review(ledger, reports, states, answer=None, positions=None):
             if finding.get("id") in rendered and render_finding(finding).strip() not in answer:
                 errors.append(f"{finding['id']}: rendered finding differs from its verified ledger entry.")
     return {"ok": not errors, "errors": errors, "checks": len(expected["checks"]), "findings": len(ids),
-            "limitations": "Validates recorded coverage and evidence consistency, not the truth of reviewer attestations or strategic judgments."}
+            "decisions": len(records), "complete": not errors and all(c.get("status") == "reviewed" for c in actual),
+            "limitations": "Checks source facts, independent decision coverage, resource provenance and recomputed arithmetic. Effect normalization, legal completeness, strategic judgments and the actual order of reasoning remain reviewer responsibilities."}
 
 
 def render_finding(finding):
@@ -162,7 +183,7 @@ def parse_position(value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("init", "validate", "render", "context", "knowledge", "cycles", "combats"):
+    for name in ("init", "validate", "render", "context", "knowledge", "snapshot", "decision", "cycles", "combats"):
         command = sub.add_parser(name)
         command.add_argument("directory", type=Path)
         if name in {"init", "validate", "render"}:
@@ -176,8 +197,10 @@ def main():
             command.add_argument("--answer", type=Path, help="Check marked finding blocks in an existing answer")
         else:
             command.add_argument("--game", required=True, type=int)
-            if name in {"context", "knowledge"}:
+            if name in {"context", "knowledge", "snapshot", "decision"}:
                 command.add_argument("--event", required=True, type=int, help="State AFTER event; choose before the action")
+                if name == "decision":
+                    command.add_argument("--kind", required=True, choices=sorted(set().union(*map(set, FACETS.values()))))
             else:
                 command.add_argument("--global-turn", type=int)
     args = parser.parse_args()
@@ -196,9 +219,9 @@ def main():
             write_json(args.out, make_review(reports, positions))
             print(json.dumps({"ledger": str(args.out), "games": sorted(reports), "status": "unreviewed"}))
             return 0
-        if args.command in {"validate", "render", "context", "knowledge"}:
+        if args.command in {"validate", "render", "context", "knowledge", "snapshot", "decision"}:
             cards, abilities = metadata(cache)
-            requests = {(f["game"], f["state_event"]) for f in ledger["findings"]} if ledger else {(args.game, args.event)}
+            requests = {(f["game"], f["state_event"]) for f in ledger.get("findings", []) + ledger.get("decisions", [])} if ledger else {(args.game, args.event)}
             states = {}
             for game, event in requests:
                 entry = next(g for g in cache.manifest["games"] if g["game"] == game)
@@ -212,6 +235,11 @@ def main():
                 return 0 if result["ok"] else 1
             state = states[args.game, args.event]
             output = context(reports[args.game], state)
+            if args.command in {"snapshot", "decision"}:
+                view = snapshot(state, reports[args.game]["seat_id"])
+                output = {"context": output, "snapshot": view}
+                if args.command == "decision":
+                    output["decision"] = decision_template(args.game, args.kind, output["context"], view)
             if args.command == "knowledge":
                 output["hand_knowledge"] = state["hand_knowledge"]
                 output["events"] = [e for e in reports[args.game]["knowledge_events"] if e["event"] <= args.event]

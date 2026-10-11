@@ -82,7 +82,7 @@ class ReviewValidationTests(unittest.TestCase):
         self.assertEqual([c["kind"] for c in ledger["checks"]], ["evidence", "position"])
         for item in ledger["checks"]:
             item.update(status="reviewed", note="Position evidence inspected.")
-        self.assertTrue(validate_review(ledger, reports, {}, positions=[(1, 1)])["ok"])
+        self.assertFalse(validate_review(ledger, reports, {}, positions=[(1, 1)])["ok"])
         self.assertFalse(validate_review(ledger, reports, {})["ok"])
 
     def test_coverage_and_each_finding_must_match_source_and_position(self):
@@ -97,9 +97,16 @@ class ReviewValidationTests(unittest.TestCase):
 
         for item in ledger["checks"]:
             item.update(status="reviewed", note="Checked opening/resources against state; no finding.")
-        self.assertTrue(validate_review(ledger, reports, {})["ok"])
+        self.assertFalse(validate_review(ledger, reports, {})["ok"])
+        for item in ledger["checks"]:
+            item.update(status="insufficient_evidence", missing="Test has no card metadata.", impact="Strategy unresolved.")
+        from decision_audit import decision_template, snapshot
+        record = decision_template(1, "combat", context(report, report["state"]), snapshot(report["state"], 1))
+        record.update(status="insufficient_evidence", window_end_event=1, note="Link-only fixture.",
+                      missing="Card metadata.", impact="No strategic verdict.")
+        ledger["decisions"] = [record]
         point = context(report, report["state"])
-        finding = {"id": "F1", "game": 1, "label": "Game 1 — before passing", "analysis": "Test finding.",
+        finding = {"id": "F1", "game": 1, "decision_id": record["id"], "label": "Game 1 — before passing", "analysis": "Test finding.",
             "state_event": 1, "window_end_event": 1, "context": point,
             "verification": {"method": "ui", "url": point["position"]["url"],
                              "checked": ["turn", "board", "stack"], "note": "Replay phase, board and empty stack matched."}}

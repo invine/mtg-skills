@@ -21,42 +21,39 @@ Describe the deck's expected route to winning and its scarce resources. Use prio
 
 **Complete when:** each reviewed game is mapped to the correct deck and result, available history coverage is known, and the intended game plan is explicit.
 
-## 2. Reconstruct before judging
+## 2. Freeze the information available at the decision
 
-For a full-game review, read [opening-and-mana.md](references/opening-and-mana.md). Review every available mulligan/keep and bottom decision, then audit mana use across every turn, including the opponent-turn windows before the next untap. For a single position, apply only the relevant checks. Keep the coverage ledger compact and develop only material findings in the answer.
+For a full-game review, read [opening-and-mana.md](references/opening-and-mana.md). Cover every available opening, own turn cycle through the next untap, and both players' combat windows, including wins and passed attacks. The coverage ledger is working evidence; keep the final answer focused on material findings.
 
-For each potentially material decision, capture the state immediately before the action:
+Before inspecting a decision's result, use `review_tools.py snapshot` at the before-action event. Read [decision-audits.md](references/decision-audits.md) for the record format and candidate tools. Capture life, current stats/counters/damage, readiness, loyalty, hand, public resources, colored mana, land drop, phase and committed combat. Verify exact card text and restrictions before normalizing calculator inputs. Label missing facts and inferences.
 
-- Both life totals; creatures and other permanents, actual stats, counters, damage, tapped status, summoning sickness, and planeswalker loyalty.
-- Available mana of every color, nonland mana sources, floating mana, land drop, and activation resources.
-- Own hand, relevant graveyard/exile/prepared resources, and remaining deck possibilities.
-- Opponent hand count and public knowledge, revealed abilities, prior actions, and the current phase, priority, or committed combat state.
+Verify land-drop availability, used loyalty activations and existing preparation from source evidence; an omitted status is unknown, not available. When a correction moves an action earlier, reconstruct and link that earlier state. Keep it separate from moves still legal at the supplied position.
 
-Label facts, inferences, and unknowns. Keep later draws and revealed cards outside the information available to the decision-maker; they may illustrate the actual result separately. Read the relevant section of [strategic-patterns.md](references/strategic-patterns.md) for interaction resolution, combat audits, multi-action sequences, expiring removal windows, removal versus trades, development versus value, hidden interaction, concessions, or a challenged finding.
+Construct baseline lines from resources in that snapshot. A draw, reveal, selection or search creates a new information boundary: retain the pre-draw plan, then evaluate the continuation from a new snapshot. Unknown cards can be discussed as conditional possibilities; they cannot fund the baseline. A useful engine counter may justify a setup line even if its actual draw was poor or an attack later failed.
 
-Before evaluating a material attack, block, response to interaction, or threat deployment, read [opponent-model.md](references/opponent-model.md). Use its hand-inference procedure to rank plausible holdings from earlier turns and subsequent draws. When interaction challenges known protection, apply **Challenges to known protection** before judging whether to respond. For threat deployment, apply the deployment comparison, including the cost of waiting.
+Before a material attack, block, interaction response or deployment, read [opponent-model.md](references/opponent-model.md). Query the point-in-time knowledge ledger for the relevant viewer seat; support hidden-hand hypotheses with prior actions and uncertainty. Apply its protection and deployment comparisons when relevant.
 
-For claims about a known hand, query the knowledge ledger at the before-action event and select the relevant viewer seat. Use the bounded calculators in [review-automation.md](references/review-automation.md#bounded-calculators) for repeated draw, colored-mana and damage arithmetic after verifying their inputs and supported mechanics.
+**Complete when:** each decision has a reproducible before-action context, the relevant facts and legal resources are established, and every continuation using newly learned information has its own boundary. If a missing fact could reverse the verdict, mark that decision unresolved and explain the effect.
 
-**Complete when:** each available opening decision and turn's mana use has been considered; the actual line and proposed alternatives are legal; opponent reads that could change the verdict have evidence and stated uncertainty. If a missing fact could reverse the evaluation, present conditional branches or leave the decision unresolved.
+## 3. Generate alternatives, then compare the played line
 
-## 3. Compare winning routes
+For each own turn or requested position, keep **lethal, development/spell order, land choice, targets/counters, combat, and reserved interaction** as separate decisions. For combat windows, cover lethal, targets, combat and interaction. One finding completes only its own decision. Share a decision record across overlapping windows when its source state and analysis cover both.
 
-Identify who benefits from time and which resource currently limits winning: threats, answers, cards, mana, life, or an attack window. Before judging a consequential risk, apply [Risk when ahead or behind](references/strategic-patterns.md#risk-when-ahead-or-behind) to establish whether the current advantage is durable and what can reverse it. Compare the played line with the strongest plausible alternative, including the opponent's sensible responses and the following turn.
+Evaluate candidates in this order, before explaining the actual outcome:
 
-For a combat review, audit attacks and blocks across every requested game, including passed attacks and wins. Check attacker selection, attack targets, creatures reserved to block, and the necessity of offered trades. Use the combat and clock procedures in [strategic-patterns.md](references/strategic-patterns.md) to calculate damage through likely blocks and compare attacking now with waiting. Report only decisions whose alternatives materially change the winning route.
+1. **Immediate win.** Test known evasion, pump, counter transfers, removal, burn and abilities before committing mana or attackers. Run the bounded lethal scan for supported effects; calculate unsupported routes manually. Consider smaller attack subsets and attacks at the opponent versus planeswalkers.
+2. **Precombat development.** Compare the strongest materially different deployments already available, including cheaper combinations, engines, hasty threats, planeswalkers and holding mana. A different development line changes the combat input; calculate it separately.
+3. **Targets and combat.** Compare counter/spell targets, partial attacks and no attack. For each serious line, test the opponent's strongest legal block, including concentrated double/triple blocks. Resolve first strike, deaths, normal damage, target damage and survivors. Check the resulting crack-back and planeswalker exposure. Use the bounded combat calculator where supported.
+4. **Land and opponent-turn resources.** Compare land options against both the chosen sequence and held responses before the next untap. Run the land-options calculator when color access differs. Finding a spell-order error does not resolve the independent land choice or whether removal stayed available.
+5. **Actual play and strategic preference.** Compare the played line with the candidates just established. Record the advantage, retained resources, cost of waiting and condition that reverses the preference. Reopen the search if a user supplies a missed alternative.
 
-Apply the best-response procedure in [opponent-model.md](references/opponent-model.md) to each candidate line. Explain why an acceptable trade is better than waiting for the known follow-up before preferring it.
+Read the relevant procedure in [strategic-patterns.md](references/strategic-patterns.md) for multi-action sequences, combat/clock comparisons, interaction resolution, expiring answers, removal versus trades, value versus development, risk, concessions or a challenged finding. Apply the best-response procedure in [opponent-model.md](references/opponent-model.md). Identify who benefits from time and the resource limiting the winning route. For a stabilization line, continue to the next meaningful attack or resource conversion; distinguish delaying defeat from creating a route to victory.
 
-Execute each alternative action by action through the opponent's next turn. Update colored mana, land drops, activation availability, attackers and blockers, planeswalker exposure, triggers, and draw/mill/shuffle order after each action. Compare immediate damage, retained resources, engine development, vulnerability to interaction, and resulting clocks. Choose lines for their contribution to winning from this position. Abstract card advantage, mana efficiency, and the deck's archetype label are evidence, not verdicts.
+Store candidate actions with source-object identities, checked calculation inputs/results, and resources/exposure through the next opponent turn. The validator recomputes supported arithmetic and rejects unavailable baseline resources. For unsupported mechanics retain the tool result and explicit manual steps; use `insufficient_evidence` when they cannot be resolved. Use `not_applicable` only with a state fact and a reason that this particular decision has no meaningful choice.
 
-For a survival or stabilization line, continue to the next meaningful attack or resource conversion: identify what can win, the required time and resources, and how the opponent can disrupt it. If the line only delays defeat, label it accordingly; weigh a riskier credible route to victory against that outcome.
+Classify findings as **clear error**, **preferred line**, **close choice**, **good play**, or **insufficient evidence**. Distinguish a defensible setup from a subsequent bad attack, an improved chance from guaranteed lethal, and a close preference from a mistake. Numerical win probabilities require a defensible model.
 
-Prioritize role assignment, preserving pressure, target and mode selection, trades, development versus removal, risk tolerance, mulligans, and timing of engines or finishers. Keep acknowledged sequencing mistakes brief unless their underlying strategic cause remains useful.
-
-Classify each candidate finding as **clear error**, **preferred line**, **close choice**, **good play**, or **insufficient evidence**. Match confidence to legality, information quality, and how robust the advantage is across responses. Treat improved chances and a guaranteed win as separate claims. Use numerical win probabilities only when backed by an explicit defensible model.
-
-**Complete when:** each retained criticism compares the played line with the strongest alternative, explains the alternative's advantage under credible responses, and states its downside, branch likelihood, and a condition that could reverse the preference. For a consequential risk, name the losing route it closes or the winning route it opens, including the cost of waiting. Support combat preferences with damage reaching the intended targets and the resulting board in the decisive branches. Claim a protected planeswalker, available counterspell, or improved clock only when the resulting resources support it. Drop criticisms that fail this comparison; zero strategic mistakes is a valid finding.
+**Complete when:** every required decision is independently accounted for; serious alternatives have legal sequences, decisive damage/survivors and opponent-turn resources; later draws have not supplied baseline actions; and the actual play has been compared with the strongest alternative. A reviewed status or generic note alone cannot complete coverage. Zero strategic mistakes is a valid conclusion after these checks.
 
 ## 4. Separate deck behavior from pilot decisions
 

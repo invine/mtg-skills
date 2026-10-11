@@ -18,7 +18,7 @@ Retain a compact judgment: **hand and play/draw → first plays and required dra
 
 Track a turn from the player's untap through the opponent's turn before the next untap. Record the available land drop, source colors, tapped/conditional sources, nonland and floating mana, committed payments, and useful response windows. Count each source once when tapped; count a utility land committed to its own activation as unavailable for producing mana. Reconcile newly generated mana and changed discounts before the next action. Exclude canceled payments using the cast-evidence procedure.
 
-Use a compact working ledger: **turn → usable sources/new mana → committed plays and activations → resources reserved and eventual use → strongest meaningful alternative**. The ledger is coverage evidence, not a mandatory final table. Distinguish mana that could have been spent at different windows from mana simultaneously available for one sequence.
+Use the [decision record](decision-audits.md) to track each land choice, development sequence and reserved interaction independently: usable sources, planned payments, alternatives and resources through the next opponent turn. Compare color access even when the planned line spends no mana; a land can strand a held answer without affecting the immediate play. The ledger is coverage evidence, not a mandatory final table. Distinguish mana that could have been spent at different windows from mana simultaneously available for one sequence.
 
 Review three cases separately:
 

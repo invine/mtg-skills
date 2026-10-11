@@ -12,7 +12,7 @@ python3 -B <skill-dir>/scripts/review_tools.py knowledge <evidence-dir> --game 4
 python3 -B <skill-dir>/scripts/review_tools.py context <evidence-dir> --game 4 --event 468
 ```
 
-For whole-game subsets, give `--games 4` or the requested game numbers. For a position-only question, use `--position 4:468` (repeat for multiple positions); this creates evidence and position checks instead of requiring a full-game review. Supply the same scope flags to `init`, `validate` and `render`. Validation defaults to all event games independently of the editable ledger, so deleting its game list cannot silently narrow the request. Initialization preserves unavailable games and starts every check as `unreviewed`. Keep an existing ledger for follow-ups; initialization refuses to overwrite it. Mark a check `reviewed` only after evaluating it, or `insufficient_evidence` with the missing fact and its effect. Fill `note` with the compact judgment or uncertainty. Generated coverage measures observations, not completed reasoning. Inspect the evidence check for each game for missing openings, unresolved casts and history gaps.
+For whole-game subsets, give `--games 4` or the requested game numbers. For a position-only question, use `--position 4:468` (repeat for multiple positions); this creates evidence and position checks instead of requiring a full-game review. Supply the same scope flags to `init`, `validate` and `render`. Validation defaults to all event games independently of the editable ledger, so deleting its game list cannot silently narrow the request. Initialization preserves unavailable games and starts every check as `unreviewed`. Keep an existing ledger for follow-ups; initialization refuses to overwrite it. Schema 2 requires linked decision records, not just coverage notes. Follow [decision-audits.md](decision-audits.md) to freeze snapshots, compare candidates and attach `decision_ids`. Mark a check `reviewed` only when its required facets are complete. For `insufficient_evidence`, fill `missing`, `impact` and `note`; the validator reports `complete:false`. Generated coverage measures observations, not completed reasoning. Preserve a schema-1 ledger as historical evidence and reconcile its findings into a freshly initialized schema-2 ledger; changing its version number does not complete the new checks. Inspect the evidence check for each game for missing openings, unresolved casts and history gaps.
 
 The knowledge query returns point-in-time `hand_knowledge` by **viewer seat**, including the card owner, first observed event and known hand-entry event. Use the opponent's viewer seat to establish what they knew about our hand. Source visibility and public identity changes support knowledge; later reveals cannot backfill it. Hidden-library transitions or gaps break tracking. An empty list means no established known identity, not that the opponent knows nothing through unrecorded information. Rank their intentions with [opponent-model.md](opponent-model.md).
 
@@ -25,6 +25,7 @@ For every highlighted play, including positives and overview callouts, add a fin
 ```json
 {
   "id": "F1", "game": 4, "state_event": 468, "choice_event": 469,
+  "decision_id": "g4:e468:interaction",
   "label": "Game 4 — your turn 9, responding to Unsummon",
   "context": {},
   "analysis": "State, opponent read, played line and strongest alternative, response, downside, winning route, confidence and reusable cue.",
@@ -43,7 +44,7 @@ python3 -B <skill-dir>/scripts/review_tools.py validate <evidence-dir> <evidence
 python3 -B <skill-dir>/scripts/review_tools.py render <evidence-dir> <evidence-dir>/review.json
 ```
 
-Render retained finding blocks from the validated ledger and use them in the answer, including the same link when mentioning that play in an overview. If assembling an answer file, keep the invisible `finding:F1` comment markers and run `validate ... --answer <answer-file>` to check those blocks against the ledger. Validation checks declared scope, source/decoder freshness, coverage statuses, before-action locators, exact URLs and verification records. It cannot detect every unmarked prose claim or prove that an attested check was actually performed. Zero findings is valid. Retain withdrawn claims with their reasons in `withdrawn`; do not reintroduce them without new evidence.
+Render retained finding blocks from the validated ledger and use them in the answer, including the same link when mentioning that play in an overview. If assembling an answer file, keep the invisible `finding:F1` comment markers and run `validate ... --answer <answer-file>` to check those blocks against the ledger. Validation checks declared scope, source/decoder freshness, independent decision coverage, before-action facts, baseline resource identities, recomputed calculations, finding-to-decision links, exact URLs and verification records. It cannot prove that all effects were normalized correctly, that candidates cover every legal option, or that prose judgments follow from the evidence. It also cannot prove the order in which the reviewer reasoned. Review those limitations explicitly rather than calling a passing ledger proof of strategic correctness. Zero findings is valid. Retain withdrawn claims with their reasons in `withdrawn`; do not reintroduce them without new evidence.
 
 ## Card references
 
@@ -70,11 +71,15 @@ Run `python3 -B <skill-dir>/scripts/limited_math.py <input.json>`; `-` reads std
 {"kind":"mana","assumptions_verified":true,"sources":[{"id":"dual","produces":["W","U"],"ready":true},{"id":"island","produces":["U"],"ready":true}],"floating":[],"steps":[{"cost":"{U}"},{"cost":"{W}"}]}
 ```
 
-**Combat:** compare separate verified branches. Supply current power/toughness and damage already marked. Supports one normal simultaneous damage step and at most one blocker per attacker; optional keywords: flying, reach, vigilance, haste, trample, deathtouch, lifelink, indestructible. Other keywords/effects, first/double strike, multiple blockers, damage prevention/replacement and triggered consequences need separate analysis. `blocked:true` preserves blocked status after the blocker leaves. Trample uses minimum lethal assignment; output is damage to each target, deaths, survivors and lifegain, not an attack recommendation.
+**Combat:** supports multiple blockers, first/double strike, marked damage, flying/reach, vigilance, haste, trample, deathtouch, lifelink and indestructible. It removes dead creatures between damage steps and preserves blocked status if blockers leave. Default damage allocation assigns lethal successively in the supplied blocker list, then excess to the last blocker or through trample. This is a chosen legal policy, not an optimal assignment or a rule requiring blocker order. To choose another split, supply `allocations`, for example `{"normal":{"a":{"blockers":{"b":1,"c":2},"target":0}}}`; phase keys are `first` and `normal`. Current rules permit a legal split without killing either blocker. See [Foundations rules changes](https://magic.wizards.com/en/news/announcements/foundations-update-bulletin).
 
 ```json
-{"kind":"combat","declarations_verified":true,"attackers":[{"id":"a","power":6,"toughness":6,"keywords":["flying"],"target":"opponent"},{"id":"b","power":2,"toughness":2}],"blockers":[{"id":"guard","power":7,"toughness":6,"keywords":["reach"]}],"blocks":{"a":["guard"]}}
+{"kind":"combat","declarations_verified":true,"attackers":[{"id":"a","power":3,"toughness":3,"keywords":["first strike"],"target":"opponent"}],"blockers":[{"id":"b","power":2,"toughness":3},{"id":"c","power":2,"toughness":3},{"id":"d","power":2,"toughness":3}],"blocks":{"a":["b","c","d"]}}
 ```
+
+The output includes each damage step, target damage, deaths, survivors and lifegain. Unmodeled triggers, prevention/replacement, protection, changing abilities between steps, or one blocker blocking multiple attackers require explicit manual analysis. `declarations_verified:true` attests that omitted mechanics do not change this branch; it does not remove them from the real game.
+
+**Lethal and land candidates:** [decision-audits.md](decision-audits.md#candidate-inputs) defines the `lethal` and `land_options` inputs. Use them during candidate generation, not only after spotting an error. Preserve the exact inputs/results and resource bindings in the decision ledger. Search bounds return `unsupported`, never a claim that no winning line exists.
 
 ## Maintenance checks
 

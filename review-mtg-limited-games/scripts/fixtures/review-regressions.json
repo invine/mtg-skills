@@ -1,0 +1,1892 @@
+{
+  "g1_t7": {
+    "source": {
+      "game": 1,
+      "event": 363,
+      "url": "https://www.17lands.com/history/5ba2a4a88a734806bf05960dac82adc4/0/0/129",
+      "purpose": "Before-action facts; later draws and result omitted."
+    },
+    "state": {
+      "event": 363,
+      "game_state_id": 363,
+      "turn": {
+        "activePlayer": 2,
+        "phase": "Phase_Beginning",
+        "turnNumber": 14,
+        "step": "Step_Draw"
+      },
+      "players": {
+        "1": {
+          "lifeTotal": 14,
+          "systemSeatNumber": 1,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 1,
+          "timeoutCount": 2
+        },
+        "2": {
+          "lifeTotal": 18,
+          "systemSeatNumber": 2,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 2,
+          "timeoutCount": 2
+        }
+      },
+      "library_counts": {
+        "1": 19,
+        "2": 23
+      },
+      "hand_knowledge": {
+        "1": [],
+        "2": [
+          {
+            "card_id": 106497,
+            "name": "Tetsuko Umezawa, Pursuer",
+            "owner": 2,
+            "learned_event": 1,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 1,
+            "instance_id": 161
+          },
+          {
+            "card_id": 106236,
+            "name": "Guiding Hydra",
+            "owner": 2,
+            "learned_event": 1,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 1,
+            "instance_id": 164
+          },
+          {
+            "card_id": 106369,
+            "name": "Fatehold Chronologist",
+            "owner": 2,
+            "learned_event": 161,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 161,
+            "instance_id": 238
+          },
+          {
+            "card_id": 106489,
+            "name": "Chandra, Torch of Defiance",
+            "owner": 2,
+            "learned_event": 289,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 289,
+            "instance_id": 278
+          },
+          {
+            "card_id": 106403,
+            "name": "Vigorbloom Vanguard",
+            "owner": 2,
+            "learned_event": 363,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 363,
+            "instance_id": 318
+          }
+        ]
+      },
+      "zones": {
+        "Battlefield": [
+          {
+            "instance_id": 313,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106246,
+            "name": "Shatterwing Pegasus",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "{o4oW}: Creatures you control get +1/+1 until end of turn."
+            ],
+            "power": 2,
+            "toughness": 3,
+            "hasSummoningSickness": true,
+            "counters": {}
+          },
+          {
+            "instance_id": 312,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 78643,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 290,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 279,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106227,
+            "name": "Blossom-Blessed Angel",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "Vigilance",
+              "This creature enters prepared."
+            ],
+            "power": 2,
+            "toughness": 4,
+            "counters": {},
+            "mana_cost": "{3}{W}"
+          },
+          {
+            "instance_id": 273,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106274,
+            "name": "Variable Chaser",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "Prowess",
+              "This creature enters prepared."
+            ],
+            "power": 2,
+            "toughness": 3,
+            "counters": {},
+            "mana_cost": "{2}{U}"
+          },
+          {
+            "instance_id": 258,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106441,
+            "name": "Danitha, Sword of Hope",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "First strike",
+              "Whenever you cast an Equipment spell or a spell that targets a creature you control, draw a card. This ability triggers only once each turn."
+            ],
+            "power": 2,
+            "toughness": 2,
+            "counters": {},
+            "mana_cost": "{2}{W}"
+          },
+          {
+            "instance_id": 257,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 247,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 78643,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 240,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 227,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 78643,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 221,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 216,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106246,
+            "name": "Shatterwing Pegasus",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "{o4oW}: Creatures you control get +1/+1 until end of turn."
+            ],
+            "power": 2,
+            "toughness": 3,
+            "counters": {}
+          },
+          {
+            "instance_id": 215,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 78645,
+            "name": "Island",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oU}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 208,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 206,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 78643,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 202,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106365,
+            "name": "Emergency Phytomedic",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters prepared."
+            ],
+            "power": 3,
+            "toughness": 3,
+            "counters": {
+              "1": 2
+            },
+            "mana_cost": "{G/W}"
+          },
+          {
+            "instance_id": 201,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 199,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106422,
+            "name": "Fatehold Annex",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "This land enters tapped unless you control a planeswalker.",
+              "{oT}: Add {oW} or {oU}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 294,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106555,
+            "name": "Jace",
+            "tapped": false,
+            "card_types": [
+              "CardType_Planeswalker"
+            ],
+            "ability_text": [
+              "Surveil 1.",
+              "Draw a card.",
+              "Loyalty"
+            ],
+            "parentId": 291,
+            "counters": {
+              "7": 1
+            }
+          }
+        ],
+        "Hand": [
+          {
+            "instance_id": 310,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 309,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 306,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 305,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 304,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 318,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106403,
+            "name": "Vigorbloom Vanguard",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters prepared.",
+              "Each creature you control with a +1/+1 counter on it has vigilance."
+            ],
+            "power": 2,
+            "toughness": 2,
+            "counters": {},
+            "mana_cost": "{1}{G/W}"
+          },
+          {
+            "instance_id": 278,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106489,
+            "name": "Chandra, Torch of Defiance",
+            "tapped": false,
+            "card_types": [
+              "CardType_Planeswalker"
+            ],
+            "ability_text": [
+              "Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.",
+              "Add {oRoR}.",
+              "Chandra deals 4 damage to target creature.",
+              "You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\"",
+              "Loyalty"
+            ],
+            "counters": {},
+            "mana_cost": "{2}{R}{R}"
+          },
+          {
+            "instance_id": 238,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106369,
+            "name": "Fatehold Chronologist",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "This creature enters prepared."
+            ],
+            "power": 1,
+            "toughness": 2,
+            "counters": {},
+            "mana_cost": "{1}{W/U}"
+          },
+          {
+            "instance_id": 164,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106236,
+            "name": "Guiding Hydra",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters with X +1/+1 counters on it.",
+              "At the beginning of combat on your turn, you may remove a +1/+1 counter from this creature. If you do, put a +1/+1 counter on each other creature you control."
+            ],
+            "power": 1,
+            "toughness": 0,
+            "counters": {},
+            "mana_cost": "{X}{W}"
+          },
+          {
+            "instance_id": 161,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106497,
+            "name": "Tetsuko Umezawa, Pursuer",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Double strike",
+              "Prowess",
+              "Whenever a creature an opponent controls with power or toughness 1 or less blocks, Tetsuko Umezawa deals 1 damage to that creature's controller."
+            ],
+            "power": 2,
+            "toughness": 4,
+            "counters": {},
+            "mana_cost": "{3}{R}"
+          }
+        ]
+      }
+    },
+    "combat": {
+      "kind": "combat",
+      "declarations_verified": true,
+      "attackers": [
+        {
+          "id": "258",
+          "power": 3,
+          "toughness": 3,
+          "keywords": [
+            "first strike"
+          ],
+          "target": "294"
+        },
+        {
+          "id": "279",
+          "power": 3,
+          "toughness": 5,
+          "keywords": [
+            "flying",
+            "vigilance"
+          ]
+        },
+        {
+          "id": "202",
+          "power": 4,
+          "toughness": 4,
+          "keywords": []
+        }
+      ],
+      "blockers": [
+        {
+          "id": "313",
+          "power": 2,
+          "toughness": 3,
+          "keywords": [
+            "flying"
+          ]
+        },
+        {
+          "id": "273",
+          "power": 2,
+          "toughness": 3,
+          "keywords": [
+            "flying"
+          ]
+        },
+        {
+          "id": "216",
+          "power": 2,
+          "toughness": 3,
+          "keywords": [
+            "flying"
+          ]
+        }
+      ],
+      "blocks": {
+        "258": [
+          "313",
+          "273",
+          "216"
+        ]
+      }
+    },
+    "normalization": "After Vanguard, Hydra X=2, Seed on Hydra, and one Hydra counter transfer; no use of the unknown draw. Chaser receives no spell-triggered bonus in this combat branch."
+  },
+  "g3_t8": {
+    "source": {
+      "game": 3,
+      "event": 429,
+      "url": "https://www.17lands.com/history/5ba2a4a88a734806bf05960dac82adc4/2/0/159",
+      "purpose": "Before-action facts; later draws and result omitted."
+    },
+    "state": {
+      "event": 429,
+      "game_state_id": 431,
+      "turn": {
+        "phase": "Phase_Beginning",
+        "turnNumber": 16,
+        "activePlayer": 2,
+        "step": "Step_Draw"
+      },
+      "players": {
+        "1": {
+          "lifeTotal": 12,
+          "systemSeatNumber": 1,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 1,
+          "timeoutCount": 2
+        },
+        "2": {
+          "lifeTotal": 20,
+          "systemSeatNumber": 2,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 2,
+          "timeoutCount": 2
+        }
+      },
+      "library_counts": {
+        "1": 22,
+        "2": 21
+      },
+      "hand_knowledge": {
+        "1": [],
+        "2": [
+          {
+            "card_id": 106449,
+            "name": "Teyo, Lightshield Expert",
+            "owner": 2,
+            "learned_event": 408,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 408,
+            "instance_id": 344
+          },
+          {
+            "card_id": 106226,
+            "name": "Academic Ascent",
+            "owner": 2,
+            "learned_event": 408,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 408,
+            "instance_id": 368
+          },
+          {
+            "card_id": 106489,
+            "name": "Chandra, Torch of Defiance",
+            "owner": 2,
+            "learned_event": 408,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 408,
+            "instance_id": 377
+          },
+          {
+            "card_id": 106452,
+            "name": "Way of the Healer",
+            "owner": 2,
+            "learned_event": 429,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 429,
+            "instance_id": 430
+          }
+        ]
+      },
+      "zones": {
+        "Battlefield": [
+          {
+            "instance_id": 424,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106365,
+            "name": "Emergency Phytomedic",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters prepared.",
+              "Trample"
+            ],
+            "power": 1,
+            "toughness": 1,
+            "hasSummoningSickness": true,
+            "counters": {},
+            "mana_cost": "{G/W}"
+          },
+          {
+            "instance_id": 394,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106333,
+            "name": "Carnivorous Cultivator",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Deathtouch",
+              "This creature enters prepared.",
+              "Whenever this creature deals combat damage to a player, return target land card from your graveyard to your hand.",
+              "Trample"
+            ],
+            "power": 2,
+            "toughness": 3,
+            "hasSummoningSickness": true,
+            "counters": {}
+          },
+          {
+            "instance_id": 386,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70501,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 379,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106236,
+            "name": "Guiding Hydra",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters with X +1/+1 counters on it.",
+              "At the beginning of combat on your turn, you may remove a +1/+1 counter from this creature. If you do, put a +1/+1 counter on each other creature you control.",
+              "Vigilance"
+            ],
+            "power": 3,
+            "toughness": 2,
+            "counters": {
+              "1": 2
+            },
+            "mana_cost": "{X}{W}"
+          },
+          {
+            "instance_id": 370,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106403,
+            "name": "Vigorbloom Vanguard",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This creature enters prepared.",
+              "Each creature you control with a +1/+1 counter on it has vigilance.",
+              "Vigilance"
+            ],
+            "power": 3,
+            "toughness": 3,
+            "counters": {
+              "1": 1
+            },
+            "mana_cost": "{1}{G/W}"
+          },
+          {
+            "instance_id": 369,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 360,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106505,
+            "name": "Ghalta the Unstoppable",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "This spell costs {oX} less to cast, where X is the greatest power among creatures you control.",
+              "Trample",
+              "Other creatures you control have trample."
+            ],
+            "power": 8,
+            "toughness": 8,
+            "counters": {}
+          },
+          {
+            "instance_id": 359,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70505,
+            "name": "Forest",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oG}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 346,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106229,
+            "name": "Campus Crier",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "{o1}, Exile this card from your graveyard: Empower Jace 2.",
+              "Vigilance"
+            ],
+            "power": 4,
+            "toughness": 2,
+            "counters": {
+              "1": 1
+            },
+            "mana_cost": "{1}{W}"
+          },
+          {
+            "instance_id": 345,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 307,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106503,
+            "name": "Fblthp, Knows the Way",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Domain \u2014 Fblthp's power is equal to the number of basic land types among lands you control.",
+              "When Fblthp enters, search your library for up to X basic land cards with different names, reveal them, put them into your hand, then shuffle.",
+              "Trample"
+            ],
+            "power": 3,
+            "toughness": 3,
+            "counters": {
+              "1": 1
+            }
+          },
+          {
+            "instance_id": 306,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70501,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 290,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106441,
+            "name": "Danitha, Sword of Hope",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "First strike",
+              "Whenever you cast an Equipment spell or a spell that targets a creature you control, draw a card. This ability triggers only once each turn.",
+              "Vigilance"
+            ],
+            "power": 4,
+            "toughness": 4,
+            "counters": {
+              "1": 2
+            },
+            "mana_cost": "{2}{W}"
+          },
+          {
+            "instance_id": 289,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 282,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70501,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 273,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75023,
+            "name": "Swamp",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oB}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 266,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70501,
+            "name": "Plains",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 254,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 213,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70505,
+            "name": "Forest",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oG}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 208,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106369,
+            "name": "Fatehold Chronologist",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flying",
+              "This creature enters prepared.",
+              "Vigilance"
+            ],
+            "power": 5,
+            "toughness": 6,
+            "counters": {
+              "1": 4
+            },
+            "mana_cost": "{1}{W/U}"
+          },
+          {
+            "instance_id": 207,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 205,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 70505,
+            "name": "Forest",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oG}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 203,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 201,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106439,
+            "name": "Vigorbloom Annex",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "This land enters tapped unless you control a planeswalker.",
+              "{oT}: Add {oG} or {oW}."
+            ],
+            "counters": {}
+          }
+        ],
+        "Hand": [
+          {
+            "instance_id": 385,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 126,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 430,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106452,
+            "name": "Way of the Healer",
+            "tapped": false,
+            "card_types": [
+              "CardType_Enchantment"
+            ],
+            "ability_text": [
+              "When Way of the Deathbringer enters, empower Jace 5.",
+              "Planeswalkers you control have \"[-2]: Create a 2/2 colorless Wizard Soldier creature token named Cadet. Surveil 1.\""
+            ],
+            "counters": {},
+            "mana_cost": "{3}{W}"
+          },
+          {
+            "instance_id": 377,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106489,
+            "name": "Chandra, Torch of Defiance",
+            "tapped": false,
+            "card_types": [
+              "CardType_Planeswalker"
+            ],
+            "ability_text": [
+              "Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.",
+              "Add {oRoR}.",
+              "Chandra deals 4 damage to target creature.",
+              "You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\"",
+              "Loyalty"
+            ],
+            "counters": {},
+            "mana_cost": "{2}{R}{R}"
+          },
+          {
+            "instance_id": 368,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106226,
+            "name": "Academic Ascent",
+            "tapped": false,
+            "card_types": [
+              "CardType_Instant"
+            ],
+            "ability_text": [
+              "Target creature gets +2/+2 and gains flying until end of turn.",
+              "Empower Jace 2."
+            ],
+            "counters": {},
+            "mana_cost": "{1}{W}"
+          },
+          {
+            "instance_id": 344,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106449,
+            "name": "Teyo, Lightshield Expert",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "Flash",
+              "When Teyo enters, target permanent you control gains hexproof until end of turn. Put a +1/+1 counter on it if it's a creature. Put a loyalty counter on it if it's a planeswalker."
+            ],
+            "power": 1,
+            "toughness": 1,
+            "counters": {},
+            "mana_cost": "{1}{W}"
+          }
+        ]
+      }
+    },
+    "lethal": {
+      "kind": "lethal",
+      "assumptions_verified": true,
+      "life": 12,
+      "sources": [
+        {
+          "id": "369",
+          "produces": [
+            "R"
+          ],
+          "ready": true
+        },
+        {
+          "id": "345",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        },
+        {
+          "id": "289",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        },
+        {
+          "id": "273",
+          "produces": [
+            "B"
+          ],
+          "ready": true
+        },
+        {
+          "id": "254",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        },
+        {
+          "id": "207",
+          "produces": [
+            "R"
+          ],
+          "ready": true
+        },
+        {
+          "id": "203",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        }
+      ],
+      "sequence": [],
+      "attackers": [
+        {
+          "id": "290",
+          "power": 4,
+          "toughness": 4,
+          "keywords": [
+            "first strike"
+          ]
+        },
+        {
+          "id": "208",
+          "power": 5,
+          "toughness": 6,
+          "keywords": [
+            "flying"
+          ]
+        },
+        {
+          "id": "379",
+          "power": 3,
+          "toughness": 2,
+          "keywords": []
+        },
+        {
+          "id": "370",
+          "power": 3,
+          "toughness": 3,
+          "keywords": []
+        },
+        {
+          "id": "346",
+          "power": 4,
+          "toughness": 2,
+          "keywords": []
+        }
+      ],
+      "blockers": [
+        {
+          "id": "360",
+          "power": 8,
+          "toughness": 8,
+          "keywords": [
+            "trample"
+          ]
+        },
+        {
+          "id": "394",
+          "power": 2,
+          "toughness": 3,
+          "keywords": []
+        },
+        {
+          "id": "307",
+          "power": 3,
+          "toughness": 3,
+          "keywords": []
+        },
+        {
+          "id": "424",
+          "power": 1,
+          "toughness": 1,
+          "keywords": [
+            "trample"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "id": "379",
+          "cost": "{0}",
+          "choices": [
+            [
+              {
+                "target": "290",
+                "power": 1,
+                "toughness": 1
+              },
+              {
+                "target": "208",
+                "power": 1,
+                "toughness": 1
+              },
+              {
+                "target": "379",
+                "power": -1,
+                "toughness": -1
+              },
+              {
+                "target": "370",
+                "power": 1,
+                "toughness": 1
+              },
+              {
+                "target": "346",
+                "power": 1,
+                "toughness": 1
+              }
+            ]
+          ]
+        },
+        {
+          "id": "368",
+          "cost": "{1}{W}",
+          "choices": [
+            [
+              {
+                "target": "290",
+                "power": 2,
+                "toughness": 2,
+                "keywords": [
+                  "flying"
+                ]
+              }
+            ],
+            [
+              {
+                "target": "208",
+                "power": 2,
+                "toughness": 2,
+                "keywords": [
+                  "flying"
+                ]
+              }
+            ],
+            [
+              {
+                "target": "379",
+                "power": 2,
+                "toughness": 2,
+                "keywords": [
+                  "flying"
+                ]
+              }
+            ],
+            [
+              {
+                "target": "370",
+                "power": 2,
+                "toughness": 2,
+                "keywords": [
+                  "flying"
+                ]
+              }
+            ],
+            [
+              {
+                "target": "346",
+                "power": 2,
+                "toughness": 2,
+                "keywords": [
+                  "flying"
+                ]
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "normalization": "Hydra transfer is optional and available once. Academic Ascent is in hand and may target any attacker before blockers. Its unknown Danitha draw is unused; empower Jace does not affect this combat. Ghalta has no reach. Opposing attack-only abilities do not modify these blocks."
+  },
+  "g7_t5": {
+    "source": {
+      "game": 7,
+      "event": 180,
+      "url": "https://www.17lands.com/history/5ba2a4a88a734806bf05960dac82adc4/6/0/54",
+      "purpose": "Before-action facts; later draws and result omitted."
+    },
+    "state": {
+      "event": 180,
+      "game_state_id": 181,
+      "turn": {
+        "phase": "Phase_Main1",
+        "turnNumber": 9,
+        "activePlayer": 2
+      },
+      "players": {
+        "1": {
+          "lifeTotal": 12,
+          "systemSeatNumber": 1,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 1,
+          "timeoutCount": 1
+        },
+        "2": {
+          "lifeTotal": 20,
+          "systemSeatNumber": 2,
+          "status": "PlayerStatus_InGame",
+          "maxHandSize": 7,
+          "controllerSeatId": 2,
+          "timeoutCount": 1
+        }
+      },
+      "library_counts": {
+        "1": 27,
+        "2": 28
+      },
+      "hand_knowledge": {
+        "1": [],
+        "2": [
+          {
+            "card_id": 106242,
+            "name": "Prophesied End",
+            "owner": 2,
+            "learned_event": 1,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 1,
+            "instance_id": 160
+          },
+          {
+            "card_id": 106226,
+            "name": "Academic Ascent",
+            "owner": 2,
+            "learned_event": 1,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 1,
+            "instance_id": 162
+          },
+          {
+            "card_id": 106283,
+            "name": "Extended Absence",
+            "owner": 2,
+            "learned_event": 1,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 1,
+            "instance_id": 164
+          },
+          {
+            "card_id": 75023,
+            "name": "Swamp",
+            "owner": 2,
+            "learned_event": 117,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 117,
+            "instance_id": 218
+          },
+          {
+            "card_id": 75021,
+            "name": "Plains",
+            "owner": 2,
+            "learned_event": 172,
+            "reason": "explicit_viewer",
+            "hand_entry_event": 172,
+            "instance_id": 239
+          }
+        ]
+      },
+      "zones": {
+        "Battlefield": [
+          {
+            "instance_id": 228,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 83974,
+            "name": "Swamp",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oB}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 220,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106489,
+            "name": "Chandra, Torch of Defiance",
+            "tapped": false,
+            "card_types": [
+              "CardType_Planeswalker"
+            ],
+            "ability_text": [
+              "Exile the top card of your library. You may cast that card. If you don't, Chandra deals 2 damage to each opponent.",
+              "Add {oRoR}.",
+              "Chandra deals 4 damage to target creature.",
+              "You get an emblem with \"Whenever you cast a spell, this emblem deals 5 damage to any target.\"",
+              "Loyalty"
+            ],
+            "counters": {
+              "7": 2
+            },
+            "mana_cost": "{2}{R}{R}"
+          },
+          {
+            "instance_id": 219,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 212,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 83973,
+            "name": "Island",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oU}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 210,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 208,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 83973,
+            "name": "Island",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oU}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 204,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106229,
+            "name": "Campus Crier",
+            "tapped": false,
+            "card_types": [
+              "CardType_Creature"
+            ],
+            "ability_text": [
+              "{o1}, Exile this card from your graveyard: Empower Jace 2."
+            ],
+            "power": 3,
+            "toughness": 1,
+            "counters": {},
+            "mana_cost": "{1}{W}"
+          },
+          {
+            "instance_id": 203,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75024,
+            "name": "Mountain",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oR}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 201,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106437,
+            "name": "Theorix Annex",
+            "tapped": true,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "This land enters tapped unless you control a planeswalker.",
+              "{oT}: Add {oU} or {oB}."
+            ],
+            "counters": {}
+          },
+          {
+            "instance_id": 199,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 234,
+            "owner": 1,
+            "controller": 1,
+            "card_id": 106555,
+            "name": "Jace",
+            "tapped": false,
+            "card_types": [
+              "CardType_Planeswalker"
+            ],
+            "ability_text": [
+              "Surveil 1.",
+              "Draw a card.",
+              "Loyalty"
+            ],
+            "parentId": 229,
+            "counters": {
+              "7": 3
+            }
+          }
+        ],
+        "Hand": [
+          {
+            "instance_id": 238,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 235,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 227,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 211,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 207,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 124,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 120,
+            "owner": null,
+            "controller": null,
+            "name": "Unknown card"
+          },
+          {
+            "instance_id": 239,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75021,
+            "name": "Plains",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oW}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 218,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 75023,
+            "name": "Swamp",
+            "tapped": false,
+            "card_types": [
+              "CardType_Land"
+            ],
+            "ability_text": [
+              "{oT}: Add {oB}."
+            ],
+            "counters": {},
+            "mana_cost": ""
+          },
+          {
+            "instance_id": 164,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106283,
+            "name": "Extended Absence",
+            "tapped": false,
+            "card_types": [
+              "CardType_Instant"
+            ],
+            "ability_text": [
+              "Exile target creature or planeswalker. Extended Absence deals 1 damage to each opponent and you gain 1 life."
+            ],
+            "counters": {},
+            "mana_cost": "{3}{B}"
+          },
+          {
+            "instance_id": 162,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106226,
+            "name": "Academic Ascent",
+            "tapped": false,
+            "card_types": [
+              "CardType_Instant"
+            ],
+            "ability_text": [
+              "Target creature gets +2/+2 and gains flying until end of turn.",
+              "Empower Jace 2."
+            ],
+            "counters": {},
+            "mana_cost": "{1}{W}"
+          },
+          {
+            "instance_id": 160,
+            "owner": 2,
+            "controller": 2,
+            "card_id": 106242,
+            "name": "Prophesied End",
+            "tapped": false,
+            "card_types": [
+              "CardType_Instant"
+            ],
+            "ability_text": [
+              "Destroy target creature. If it wasn't attacking, its controller draws a card."
+            ],
+            "counters": {},
+            "mana_cost": "{1}{W}"
+          }
+        ]
+      }
+    },
+    "land_options": {
+      "kind": "land_options",
+      "assumptions_verified": true,
+      "sources": [
+        {
+          "id": "219",
+          "produces": [
+            "R"
+          ],
+          "ready": true
+        },
+        {
+          "id": "210",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        },
+        {
+          "id": "203",
+          "produces": [
+            "R"
+          ],
+          "ready": true
+        },
+        {
+          "id": "199",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        }
+      ],
+      "lands": [
+        {
+          "id": "239",
+          "produces": [
+            "W"
+          ],
+          "ready": true
+        },
+        {
+          "id": "218",
+          "produces": [
+            "B"
+          ],
+          "ready": true
+        }
+      ],
+      "sequence": [],
+      "interaction": [
+        {
+          "id": "164",
+          "cost": "{3}{B}"
+        },
+        {
+          "id": "162",
+          "cost": "{1}{W}"
+        },
+        {
+          "id": "160",
+          "cost": "{1}{W}"
+        }
+      ],
+      "chosen": "239"
+    },
+    "normalization": "Land drop remains available. Planned Crier attack on Jace uses no mana. All five lands remain untapped through the following opponent turn; each held response is an independent option, not a promise to cast all three."
+  }
+}

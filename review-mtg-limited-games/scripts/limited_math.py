@@ -162,11 +162,14 @@ def mana_sequence(data):
 
 
 def combat_damage(data):
-    keys(data, {"kind", "declarations_verified", "attackers", "blockers", "blocks"})
+    keys(data, {"kind", "declarations_verified", "attackers", "blockers", "blocks", "allocations"})
     if data.get("declarations_verified") is not True:
-        raise Unsupported("Verify declarations, actual stats and absence of other damage modifiers/triggers first")
+        raise Unsupported("Verify declarations, stats and absence of unmodeled modifiers, triggers or actions between damage steps")
     attackers, blockers, blocks = data["attackers"], data["blockers"], data["blocks"]
-    supported = {"flying", "reach", "vigilance", "haste", "trample", "deathtouch", "lifelink", "indestructible"}
+    if len(attackers) + len(blockers) > 30:
+        raise Unsupported("At most 30 combatants")
+    supported = {"flying", "reach", "vigilance", "haste", "trample", "deathtouch", "lifelink",
+                 "indestructible", "first strike", "double strike"}
     creatures = {}
     for creature in attackers + blockers:
         keys(creature, {"id", "power", "toughness", "damage", "keywords", "target", "blocked"})
@@ -175,60 +178,111 @@ def combat_damage(data):
             raise ValueError("Creature IDs must be unique nonempty strings")
         for field, minimum in (("power", -1000), ("toughness", 1), ("damage", 0)):
             integer(creature.get(field, 0), field, minimum)
-        keywords = set(creature.get("keywords", []))
-        if keywords - supported:
-            raise Unsupported(f"Unsupported combat mechanics: {sorted(keywords - supported)}")
+        if set(creature.get("keywords", [])) - supported:
+            raise Unsupported("Unsupported combat keywords")
         if "blocked" in creature and type(creature["blocked"]) is not bool:
             raise ValueError("blocked must be true/false")
         if not isinstance(creature.get("target", "opponent"), str):
             raise ValueError("Attack target must be a string ID")
+        if creature.get("damage", 0) >= creature["toughness"] and "indestructible" not in creature.get("keywords", []):
+            raise ValueError("Apply state-based deaths before supplying combatants")
         creatures[cid] = creature
     attack_ids, block_ids = {a["id"] for a in attackers}, {b["id"] for b in blockers}
     used = []
     for aid, bids in blocks.items():
         if aid not in attack_ids or not isinstance(bids, list) or any(b not in block_ids for b in bids):
             raise ValueError("Blocks must connect known attackers and blockers")
-        if len(bids) > 1:
-            raise Unsupported("Multiple blockers require explicit damage allocation; this calculator supports one per attacker")
         used.extend(bids)
+        if "flying" in creatures[aid].get("keywords", []) and any(
+                not set(creatures[b].get("keywords", [])) & {"flying", "reach"} for b in bids):
+            raise ValueError("This blocker cannot block flying under the supplied mechanics")
     if len(used) != len(set(used)):
-        raise Unsupported("A blocker assigned to multiple attackers is unsupported")
-    damage, deathtouch, targets, life = {c: 0 for c in creatures}, set(), {}, {"attacking": 0, "defending": 0}
-    for attacker in attackers:
-        aid = attacker["id"]
-        target = attacker.get("target", "opponent")
-        targets.setdefault(target, 0)
-        ak = set(attacker.get("keywords", []))
-        power = max(0, attacker["power"])
-        bids = blocks.get(aid, [])
-        through = 0
-        if bids:
-            blocker = creatures[bids[0]]
-            bid, bk = blocker["id"], set(blocker.get("keywords", []))
-            if "flying" in ak and not bk & {"flying", "reach"}:
-                raise ValueError("This blocker cannot block flying under the supplied mechanics")
-            lethal = 1 if "deathtouch" in ak else max(0, blocker["toughness"] - blocker.get("damage", 0))
-            dealt = min(power, lethal) if "trample" in ak else power
-            damage[bid] += dealt
-            damage[aid] += max(0, blocker["power"])
-            if "deathtouch" in ak and dealt:
-                deathtouch.add(bid)
-            if "deathtouch" in bk and blocker["power"] > 0:
-                deathtouch.add(aid)
-            if "lifelink" in bk:
-                life["defending"] += max(0, blocker["power"])
-            if "trample" in ak:
-                through = power - dealt
-        elif not attacker.get("blocked") or "trample" in ak:
-            through = power
-        targets[target] += through
-        if "lifelink" in ak and (bids or through):
-            life["attacking"] += power
-    dead = [cid for cid, creature in creatures.items() if "indestructible" not in creature.get("keywords", []) and
-            (damage[cid] + creature.get("damage", 0) >= creature["toughness"] or cid in deathtouch)]
+        raise Unsupported("A blocker assigned more than once is unsupported")
+    allocations = data.get("allocations", {})
+    keys(allocations, {"first", "normal"})
+    for allocation in allocations.values():
+        if set(allocation) - attack_ids:
+            raise ValueError("Explicit allocations must name attackers")
+    damage = {c: 0 for c in creatures}
+    marked = {c: creatures[c].get("damage", 0) for c in creatures}
+    alive, dead, touched = set(creatures), set(), set()
+    targets = {a.get("target", "opponent"): 0 for a in attackers}
+    life, steps, consumed = {"attacking": 0, "defending": 0}, [], set()
+    keywords = {c: set(creatures[c].get("keywords", [])) for c in creatures}
+    has_first = any(k & {"first strike", "double strike"} for k in keywords.values())
+    for phase in (["first", "normal"] if has_first else ["normal"]):
+        step_damage, step_targets, step_touch = {}, {}, set()
+
+        def deals(cid):
+            return cid in alive and (bool(keywords[cid] & {"first strike", "double strike"}) if phase == "first"
+                                     else "first strike" not in keywords[cid] or "double strike" in keywords[cid])
+
+        def lethal(cid, source):
+            return 1 if "deathtouch" in keywords[source] else max(0, creatures[cid]["toughness"] - marked[cid])
+
+        def hit(source, recipient, amount, side, creature=True):
+            if creature:
+                step_damage[recipient] = step_damage.get(recipient, 0) + amount
+                if amount and "deathtouch" in keywords[source]:
+                    step_touch.add(recipient)
+            else:
+                step_targets[recipient] = step_targets.get(recipient, 0) + amount
+            if "lifelink" in keywords[source]:
+                life[side] += amount
+
+        for attacker in attackers:
+            aid = attacker["id"]
+            if not deals(aid):
+                continue
+            power, target = max(0, attacker["power"]), attacker.get("target", "opponent")
+            bids = [b for b in blocks.get(aid, []) if b in alive]
+            blocked = bool(blocks.get(aid)) or attacker.get("blocked", False)
+            trample = "trample" in keywords[aid]
+            explicit = allocations.get(phase, {}).get(aid)
+            if explicit is not None:
+                keys(explicit, {"blockers", "target"})
+                assigned, through = explicit.get("blockers", {}), explicit.get("target", 0)
+                if set(assigned) - set(bids):
+                    raise ValueError("Cannot assign to an absent blocker")
+                for n in list(assigned.values()) + [through]:
+                    integer(n, "assigned damage")
+                expected = power if bids or not blocked or trample else 0
+                if sum(assigned.values()) + through != expected:
+                    raise ValueError("Allocation must account for all assignable power")
+                if through and blocked and (not trample or any(assigned.get(b, 0) < lethal(b, aid) for b in bids)):
+                    raise ValueError("Trample requires lethal assignment to every remaining blocker")
+                consumed.add((phase, aid))
+            else:
+                # A chosen legal policy, NOT the pre-Foundations assignment-order rule.
+                assigned, left = {}, power
+                for i, bid in enumerate(bids):
+                    amount = min(left, lethal(bid, aid)) if trample or i < len(bids) - 1 else left
+                    assigned[bid], left = amount, left - amount
+                through = left if trample or not blocked else 0
+            for bid, amount in assigned.items():
+                hit(aid, bid, amount, "attacking")
+            hit(aid, target, through, "attacking", creature=False)
+        for aid, bids in blocks.items():
+            for bid in bids:
+                if deals(bid) and aid in alive:
+                    hit(bid, aid, max(0, creatures[bid]["power"]), "defending")
+        for cid, amount in step_damage.items():
+            damage[cid] += amount
+            marked[cid] += amount
+        for target, amount in step_targets.items():
+            targets[target] += amount
+        touched |= step_touch
+        died = {cid for cid in alive if "indestructible" not in keywords[cid] and
+                (marked[cid] >= creatures[cid]["toughness"] or cid in touched)}
+        alive -= died
+        dead |= died
+        steps.append({"step": phase, "damage_to_creatures": step_damage,
+                      "damage_to_targets": step_targets, "died": sorted(died)})
+    if consumed != {(phase, aid) for phase, mapping in allocations.items() for aid in mapping}:
+        raise ValueError("Unused allocation: creature did not deal damage in that step")
     return {"status": "calculated", "damage_to_targets": targets, "damage_to_creatures": damage,
-            "dead": sorted(dead), "survivors": sorted(set(creatures) - set(dead)), "life_gained": life,
-            "interpretation": "One normal simultaneous damage step, at most one blocker per attacker, no other modifiers or triggers. Trample assigns minimum lethal to its blocker."}
+            "dead": sorted(dead), "survivors": sorted(alive), "life_gained": life, "steps": steps,
+            "interpretation": "First/normal damage with deaths between steps; no intervening effects. Default assigns lethal to successive listed blockers, then excess to the last (or tramples). Explicit allocations may choose any legal split; this is not an optimal-combat search."}
 
 
 def calculate(data):
@@ -241,7 +295,10 @@ def calculate(data):
             return mana_sequence(data)
         if data.get("kind") == "combat":
             return combat_damage(data)
-        raise Unsupported("Supported kinds: draw, mana, combat")
+        if data.get("kind") in {"lethal", "land_options"}:
+            from decision_candidates import lethal_candidates, land_options
+            return (lethal_candidates if data["kind"] == "lethal" else land_options)(data)
+        raise Unsupported("Supported kinds: draw, mana, combat, lethal, land_options")
     except Unsupported as exc:
         return {"status": "unsupported", "reason": str(exc)}
 
